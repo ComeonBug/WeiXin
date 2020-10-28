@@ -1,4 +1,4 @@
-from weixin.contact.token import WeiXin
+from contact.token import WeiXin
 
 
 class TestToken:

@@ -1,7 +1,7 @@
 import requests
 import logging
 import json
-from weixin.contact.token import WeiXin
+from contact.token import WeiXin
 
 
 class TestDepartment:
