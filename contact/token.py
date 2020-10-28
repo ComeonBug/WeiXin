@@ -8,16 +8,16 @@ class WeiXin:
     logging.basicConfig(level=logging.DEBUG)
     _token = ""
 
-    # 不需要初始化，用classmethod
+    # @classmethod
+    # def get_token(cls):
+    #     if len(cls._token) == 0:
+    #         cls._token = cls.get_token_new()
+    #     return cls._token
+
     @classmethod
-    def get_token(cls):
-        if len(cls._token) == 0:
-            # 从yaml文件中读取数据
-            conf = yaml.load(open('weixin.yml'))
-            # logging.debug(conf.get('env'))
-            url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
-            r = requests.get(url, params={'corpid':conf['env']['corpid'],'corpsecret':conf['env']['corpsecret']})
-            result = r.json()
-            cls._token = result['access_token']
-            # logging.debug(cls._token)
-        return cls._token
+    def get_token_new(cls):
+        conf = yaml.load(open('weixin.yml'))
+        r = requests.get("https://qyapi.weixin.qq.com/cgi-bin/gettoken",
+                         params={'corpid': conf['env']['corpid'], 'corpsecret': conf['env']['corpsecret']}
+                         ).json()
+        return r['access_token']

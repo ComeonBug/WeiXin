@@ -1,3 +1,5 @@
+import time
+
 import pystache
 
 class Utils:
@@ -6,3 +8,7 @@ class Utils:
         with open(tmplate_path) as f:
             tmp = f.read()
         return pystache.render(tmp, dict)
+
+    @classmethod
+    def udid(cls):
+        return str(int(time.time()))

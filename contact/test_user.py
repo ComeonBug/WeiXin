@@ -1,12 +1,5 @@
 import json
 import logging
-import random
-import time
-
-import pystache
-import requests
-
-from contact.token import WeiXin
 from contact.user import User
 from contact.utils import Utils
 
@@ -14,7 +7,7 @@ from contact.utils import Utils
 class TestUser:
     logging.basicConfig(level=logging.DEBUG)
     depart_id = 2
-    no = str(int(time.time()))
+
 
     @classmethod
     def setup_class(cls):
@@ -24,9 +17,9 @@ class TestUser:
 
     def test_add_user(self):
         data = {
-            "userid": "id_" + self.no,
-            "name": "n_" + self.no,
-            "mobile": "15822259939",
+            "userid": "id_" + Utils.udid(),
+            "name": "n_" + Utils.udid(),
+            "mobile": "86+ 1" + Utils.udid(),
             "department": [self.depart_id]
         }
         r = self.user.create(data)
@@ -41,10 +34,10 @@ class TestUser:
 
     def test_create_user_by_template(self):
         param = {
-            "userid": "no_" + self.no,
-            "name": "t_" + self.no,
-            "mobile": "86+ 1" + self.no,
-            "email" : self.no +"@qq.com"
+            "userid": "no_" + Utils.udid(),
+            "name": "t_" + Utils.udid(),
+            "mobile": "86+ 1" + Utils.udid(),
+            "email" : Utils.udid() +"@qq.com"
         }
         data = str(Utils.get_info_from_tmpl("user_create.json",param))
         data = data.encode("UTF-8")
